@@ -15,6 +15,7 @@ public class ParsePlugin extends CordovaPlugin {
     public static final String ACTION_INITIALIZE = "initialize";
     public static final String ACTION_GET_INSTALLATION_ID = "getInstallationId";
     public static final String ACTION_GET_INSTALLATION_OBJECT_ID = "getInstallationObjectId";
+    public static final String ACTION_PUT_ON_INSTALLATION_OBJECT = "putOnInstallationObject";
     public static final String ACTION_GET_SUBSCRIPTIONS = "getSubscriptions";
     public static final String ACTION_SUBSCRIBE = "subscribe";
     public static final String ACTION_UNSUBSCRIBE = "unsubscribe";
@@ -32,6 +33,11 @@ public class ParsePlugin extends CordovaPlugin {
 
         if (action.equals(ACTION_GET_INSTALLATION_OBJECT_ID)) {
             this.getInstallationObjectId(callbackContext);
+            return true;
+        }
+
+        if (action.equals(ACTION_PUT_ON_INSTALLATION_OBJECT)) {
+            this.putOnInstallationObject(args.getString(0), args.getString(1), callbackContext);
             return true;
         }
         if (action.equals(ACTION_GET_SUBSCRIPTIONS)) {
@@ -81,6 +87,19 @@ public class ParsePlugin extends CordovaPlugin {
                 String objectId = ParseInstallation.getCurrentInstallation().getObjectId();
                 callbackContext.success(objectId);
             }
+        });
+    }
+
+    private void putOnInstallationObject(String key, String value, callbackContext) {
+        cordova.getThreadPool().execute(new Runnable() {
+             public void run() {
+
+                ParseInstallation installation = ParseInstallation.getCurrentInstallation();
+                installation.put(key, value);
+                installation.saveInBackground();
+                callbackContext.success();
+
+             }
         });
     }
 

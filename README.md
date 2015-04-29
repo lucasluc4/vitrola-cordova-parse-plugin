@@ -10,6 +10,7 @@ This plugin exposes the four native Android API push services to JS:
 * <a href="https://www.parse.com/docs/android/api/com/parse/PushService.html#getSubscriptions(android.content.Context)">getSubscriptions</a>
 * <a href="https://www.parse.com/docs/android/api/com/parse/PushService.html#subscribe(android.content.Context, java.lang.String, java.lang.Class, int)">subscribe</a>
 * <a href="https://www.parse.com/docs/android/api/com/parse/PushService.html#unsubscribe(android.content.Context, java.lang.String)">unsubscribe</a>
+* and a method for adding data to ParseInstallation object
 
 Installation
 ------------
@@ -17,8 +18,8 @@ Installation
 Pick one of these two commands:
 
 ```
-phonegap local plugin add https://github.com/benjie/phonegap-parse-plugin
-cordova plugin add https://github.com/benjie/phonegap-parse-plugin
+phonegap local plugin add https://github.com/lucasluc4/vitrola-cordova-parse-plugin
+cordova plugin add https://github.com/lucasluc4/vitrola-cordova-parse-plugin
 ```
 
 Initial Setup

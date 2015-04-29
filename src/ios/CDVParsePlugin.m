@@ -38,6 +38,21 @@
     }];
 }
 
+- (void)putOnInstallationObject:(CDVInvokedUrlCommand*) command
+{
+    [self.commandDelegate runInBackground:^{
+        CDVPluginResult* pluginResult = nil;
+        PFInstallation *currentInstallation = [PFInstallation currentInstallation];
+
+        NSString *key = [command.arguments objectAtIndex:0];
+        NSString *value = [command.arguments objectAtIndex:1];
+        [installation setObject:value forKey:key];
+
+        pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK];
+        [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
+    }];
+}
+
 - (void)getSubscriptions: (CDVInvokedUrlCommand *)command
 {
     NSArray *channels = [PFInstallation currentInstallation].channels;

@@ -29,6 +29,16 @@ var parsePlugin = {
         );
     },
 
+    putOnInstallationObject: function(key, value, successCallback, errorCallback) {
+        cordova.exec(
+            successCallback,
+            errorCallback,
+            'ParsePlugin',
+            'putOnInstallationObject',
+            [key, value]
+        );
+    },
+
     getSubscriptions: function(successCallback, errorCallback) {
         cordova.exec(
             successCallback,
